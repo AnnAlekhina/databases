@@ -1,19 +1,19 @@
-/*Составьте список пользователей users, которые осуществили хотя бы один заказ orders в интернет магазине*/
+/*РЎРѕСЃС‚Р°РІСЊС‚Рµ СЃРїРёСЃРѕРє РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ users, РєРѕС‚РѕСЂС‹Рµ РѕСЃСѓС‰РµСЃС‚РІРёР»Рё С…РѕС‚СЏ Р±С‹ РѕРґРёРЅ Р·Р°РєР°Р· orders РІ РёРЅС‚РµСЂРЅРµС‚ РјР°РіР°Р·РёРЅРµ.*/
 select name
 from users join orders 
 on  (orders.user_id = users.id)
 group by users.name
 having count(orders.id)>0;
 
-/*Выведите список товаров products и разделов catalogs, который соответствует товару
+/*Р’С‹РІРµРґРёС‚Рµ СЃРїРёСЃРѕРє С‚РѕРІР°СЂРѕРІ products Рё СЂР°Р·РґРµР»РѕРІ catalogs, РєРѕС‚РѕСЂС‹Р№ СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓРµС‚ С‚РѕРІР°СЂСѓ.
  */
 select products.name, catalogs.name
 from products join catalogs
 on products.catalog_id = catalogs.id
 group by products.name;
-/*Пусть имеется таблица рейсов flights (id, from, to) и таблица городов cities (label, name). 
-Поля from, to и label содержат английские названия городов, поле name — русское.
-Выведите список рейсов flights с русскими названиями городов.*/
+/*РџСѓСЃС‚СЊ РёРјРµРµС‚СЃСЏ С‚Р°Р±Р»РёС†Р° СЂРµР№СЃРѕРІ flights (id, from, to) Рё С‚Р°Р±Р»РёС†Р° РіРѕСЂРѕРґРѕРІ cities (label, name).
+РџРѕР»СЏ from, to Рё label СЃРѕРґРµСЂР¶Р°С‚ Р°РЅРіР»РёР№СЃРєРёРµ РЅР°Р·РІР°РЅРёСЏ РіРѕСЂРѕРґРѕРІ, РїРѕР»Рµ name вЂ” СЂСѓСЃСЃРєРѕРµ. 
+Р’С‹РІРµРґРёС‚Рµ СЃРїРёСЃРѕРє СЂРµР№СЃРѕРІ flights СЃ СЂСѓСЃСЃРєРёРјРё РЅР°Р·РІР°РЅРёСЏРјРё РіРѕСЂРѕРґРѕРІ.*/
 use study_db;
 drop table if exists flights;
 create table flights(
@@ -35,11 +35,11 @@ insert into flights (from_city,to_city) values
 	('moscow','kazan');
 
 insert into cities (label,name) values
-	('moscow','Москва'),
-	('irkutsk','Иркутск'),
-	('novgorod','Новгород'),
-	('kazan','Казань'),
-	('omsk','Омск');
+	('moscow','ГЊГ®Г±ГЄГўГ '),
+	('irkutsk','Г€Г°ГЄГіГІГ±ГЄ'),
+	('novgorod','ГЌГ®ГўГЈГ®Г°Г®Г¤'),
+	('kazan','ГЉГ Г§Г Г­Гј'),
+	('omsk','ГЋГ¬Г±ГЄ');
 
 
 select
