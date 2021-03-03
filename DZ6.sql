@@ -1,7 +1,7 @@
 use vk;
 
-/*Пусть задан некоторый пользователь. Из всех пользователей соц. сети найдите человека,
-который больше всех общался с выбранным пользователем (написал ему сообщений).*/
+/*РџСѓСЃС‚СЊ Р·Р°РґР°РЅ РЅРµРєРѕС‚РѕСЂС‹Р№ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ. РР· РІСЃРµС… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ СЃРѕС†. СЃРµС‚Рё РЅР°Р№РґРёС‚Рµ С‡РµР»РѕРІРµРєР°, 
+РєРѕС‚РѕСЂС‹Р№ Р±РѕР»СЊС€Рµ РІСЃРµС… РѕР±С‰Р°Р»СЃСЏ СЃ РІС‹Р±СЂР°РЅРЅС‹Рј РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј (РЅР°РїРёСЃР°Р» РµРјСѓ СЃРѕРѕР±С‰РµРЅРёР№).*/
 
 select from_user_id,
 	(select firstname from users where id = messages.from_user_id),
@@ -12,7 +12,7 @@ where to_user_id = 1
 group by from_user_id
 order by from_user_id desc
 limit 1;
-/*Подсчитать общее количество лайков, которые получили пользователи младше 10 лет..*/
+/*РџРѕРґСЃС‡РёС‚Р°С‚СЊ РѕР±С‰РµРµ РєРѕР»РёС‡РµСЃС‚РІРѕ Р»Р°Р№РєРѕРІ, РєРѕС‚РѕСЂС‹Рµ РїРѕР»СѓС‡РёР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»Рё РјР»Р°РґС€Рµ 10 Р»РµС‚..*/
 
 select count(*) from likes
 where media_id in (select id from media 
@@ -21,18 +21,18 @@ where media_id in (select id from media
 		)
 	);
 
-/*Определить кто больше поставил лайков (всего): мужчины или женщины.*/
+/*РћРїСЂРµРґРµР»РёС‚СЊ РєС‚Рѕ Р±РѕР»СЊС€Рµ РїРѕСЃС‚Р°РІРёР» Р»Р°Р№РєРѕРІ (РІСЃРµРіРѕ): РјСѓР¶С‡РёРЅС‹ РёР»Рё Р¶РµРЅС‰РёРЅС‹.*/
 
 
 
-select count(*),'мужчины' from likes
+select count(*),'Г¬ГіГ¦Г·ГЁГ­Г»' from likes
 where media_id in (select id from media 
 	where user_id in (select user_id from profiles 
 		where gender ='m'
 		)
 	)
 	union 
-select count(*),'женщины' from likes
+select count(*),'Г¦ГҐГ­Г№ГЁГ­Г»' from likes
 where media_id in (select id from media 
 	where user_id in (select user_id from profiles 
 		where gender ='f'
