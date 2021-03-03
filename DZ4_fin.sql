@@ -1,4 +1,4 @@
-#1.Заполнить все таблицы БД vk данными (по 10-100 записей в каждой таблице)
+#1.Р—Р°РїРѕР»РЅРёС‚СЊ РІСЃРµ С‚Р°Р±Р»РёС†С‹ Р‘Р” vk РґР°РЅРЅС‹РјРё (РїРѕ 10-100 Р·Р°РїРёСЃРµР№ РІ РєР°Р¶РґРѕР№ С‚Р°Р±Р»РёС†Рµ)
 
 -- Generation time: Sun, 03 Jan 2021 10:17:56 +0000
 -- Host: mysql.hostinger.ro
@@ -232,7 +232,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `firstname` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `lastname` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Р¤Р°РјРёР»СЊ',
+  `lastname` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'ГђВ¤ГђВ°ГђВјГђВёГђВ»Г‘ВЊ',
   `email` varchar(120) COLLATE utf8_unicode_ci DEFAULT NULL,
   `password_hash` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `phone` bigint(20) unsigned DEFAULT NULL,
@@ -240,7 +240,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `phone` (`phone`),
   KEY `users_firstname_lastname_idx` (`firstname`,`lastname`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='СЋР·РµСЂС‹';
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Г‘ВЋГђВ·ГђВµГ‘ВЂГ‘В‹';
 
 INSERT INTO `users` VALUES ('1','Prudence','Carter','steuber.juwan@example.net','b7390ce79b74bb6b7acde3bcc91a930fa3b4b4ec','89274487067'),
 ('2','Keegan','Frami','uhammes@example.org','c73ddfd85caad681c4b0273c548719edaf4639cb','89382931073'),
@@ -287,17 +287,17 @@ INSERT INTO `users_communities` VALUES ('1','1'),
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 
-#2.Написать скрипт, возвращающий список имен (только firstname) пользователей без повторений в алфавитном порядке
+#2.РќР°РїРёСЃР°С‚СЊ СЃРєСЂРёРїС‚, РІРѕР·РІСЂР°С‰Р°СЋС‰РёР№ СЃРїРёСЃРѕРє РёРјРµРЅ (С‚РѕР»СЊРєРѕ firstname) РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ Р±РµР· РїРѕРІС‚РѕСЂРµРЅРёР№ РІ Р°Р»С„Р°РІРёС‚РЅРѕРј РїРѕСЂСЏРґРєРµ
 USE vk;
 select DISTINCT firstname
 from users
 ORDER by firstname
 ;
-#3 Написать скрипт, отмечающий несовершеннолетних пользователей как неактивных (поле is_active = false). Предварительно добавить такое поле в таблицу profiles со значением по умолчанию = true (или 1)
+#3 РќР°РїРёСЃР°С‚СЊ СЃРєСЂРёРїС‚, РѕС‚РјРµС‡Р°СЋС‰РёР№ РЅРµСЃРѕРІРµСЂС€РµРЅРЅРѕР»РµС‚РЅРёС… РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№ РєР°Рє РЅРµР°РєС‚РёРІРЅС‹С… (РїРѕР»Рµ is_active = false). РџСЂРµРґРІР°СЂРёС‚РµР»СЊРЅРѕ РґРѕР±Р°РІРёС‚СЊ С‚Р°РєРѕРµ РїРѕР»Рµ РІ С‚Р°Р±Р»РёС†Сѓ profiles СЃРѕ Р·РЅР°С‡РµРЅРёРµРј РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ = true (РёР»Рё 1)
 alter table profiles add column is_active tinyint default 1;
 update profiles set is_active = 0
 where extract(year from now()) - extract(year from birthday) < 18 ;
-#4 Написать скрипт, удаляющий сообщения «из будущего» (дата больше сегодняшней)
+#4 РќР°РїРёСЃР°С‚СЊ СЃРєСЂРёРїС‚, СѓРґР°Р»СЏСЋС‰РёР№ СЃРѕРѕР±С‰РµРЅРёСЏ В«РёР· Р±СѓРґСѓС‰РµРіРѕВ» (РґР°С‚Р° Р±РѕР»СЊС€Рµ СЃРµРіРѕРґРЅСЏС€РЅРµР№)
 insert into messages VALUES ('11','1','1','Magni et similique incidunt in temporibus natus. Provident quaerat officiis similique et perspiciatis. In asperiores sit temporibus assumenda. Unde omnis vel expedita explicabo eum aut.',now()+interval 1 year);
 delete from messages where created_at > now();
 
